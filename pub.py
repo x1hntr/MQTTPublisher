@@ -3,23 +3,29 @@ import time                               #import paho mqtt
 import ssl
 import random
  
-cliente = "varClima"
+host          = "ioticos.org"
+port          = 1883
+clean_session = True
+cliente       = "varClima"
+user_name     = "wKhj0dyPEhaXgT5"
+password      = "VVkfFKYZAzEV7t0"    
+topic         = "3Rgxx48mXbo1xia"
 
 def conexion_exitosa(client, userdata, flags, rc):
     #client.subscribe("ZHHDbfhBRGMGt7e") 
     client.publish("ambiente/temp") 
-    
+
 cliente = mqtt.Client()
 cliente.on_connect = conexion_exitosa 
-cliente.username_pw_set("x1hntr", "712189")                    #Pasww y user 
-cliente.connect("broker.mqttdashboard.com", 1883, 60)          #Public broker of hiveMQ
+cliente.username_pw_set(user_name, password)                    #Pasww y user 
+cliente.connect(host, port, 60)          #Public broker of hiveMQ
 
 while True:
-    temp = random.randrange(18, 22)
-    aire = random.randrange(92, 100)   
-    hume = random.randrange(60, 70)
-    cliente.publish("ambiente/temp", temp)
-    cliente.publish("ambiente/aire", aire)
-    cliente.publish("ambiente/hume", hume)
+    temperature = random.randrange(18, 22)
+    air = random.randrange(92, 100)   
+    humidity = random.randrange(60, 70)
+    cliente.publish(topic + "/temperature", temperature)
+    cliente.publish(topic + "/air", air)
+    cliente.publish(topic + "/humidity", humidity)
     time.sleep(1)
 cliente.loop()                                       
