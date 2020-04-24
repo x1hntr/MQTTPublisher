@@ -3,6 +3,8 @@ import time                               #import paho mqtt
 import ssl
 import random
  
+#MQTT CREDENTIALS
+
 host          = "ioticos.org"
 port          = 1883
 clean_session = True
@@ -12,7 +14,7 @@ password      = "VVkfFKYZAzEV7t0"
 topic         = "3Rgxx48mXbo1xia"
 
 def conexion_exitosa(client, userdata, flags, rc):
-    #client.subscribe("ZHHDbfhBRGMGt7e") 
+
     client.publish("ambiente/temp") 
 
 cliente = mqtt.Client()

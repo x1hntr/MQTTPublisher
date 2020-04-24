@@ -4,7 +4,9 @@ import ssl
 import sys
 import random
 
-host          = "ioticos.org"
+#MQTT CREDENTIALS
+
+host          = "ioticos.org"                              
 port          = 1883
 clean_session = True
 client_id     = "CLIMA"
@@ -14,8 +16,8 @@ topic         = "3Rgxx48mXbo1xia"
 
 def on_connect (client, userdata, flags, rc):
   """ Callback called when connection/reconnection is detected """
-  print ("Conected" % (host))
-  client.subscribe(topic + '/temperature', qos=1)
+  print ("Conected" + host)
+  client.subscribe(topic + '/temperature', qos=1)           #ALL TOPICS
   client.subscribe(topic + '/air', qos=1)
   client.subscribe(topic + '/humidity', qos=1)
 
